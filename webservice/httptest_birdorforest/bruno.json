@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "httptest_birdorforest",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
