@@ -8,6 +8,14 @@ from fastapi import FastAPI, File, UploadFile
 app = FastAPI()
 
 
+# Allow CORS for all domains
+@app.middleware("http")
+async def add_cors_header(request, call_next):
+    response = await call_next(request)
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    return response
+
+
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
