@@ -1,0 +1,1 @@
+/Users/teejays/Development/ai/lab-birdorforest/ml/trained_model.pkl
