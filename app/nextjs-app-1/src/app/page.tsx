@@ -1,11 +1,7 @@
-import { FileUploadForm } from "@/components/form/file-upload-form";
+import { ClassifyForm } from '@/app/classify-form'
 
 const Home = (props: {}) => {
-  return <Form />;
+    return <ClassifyForm />
 }
 
-export default Home;
-
-const Form = (props: {}) => {
-    return <FileUploadForm />;
-}
+export default Home
