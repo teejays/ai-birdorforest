@@ -1,14 +1,14 @@
-# Load a fastai model from file
-# from fastai.vision.all import *
-
-# learn = load_learner("trained_model.pkl")
-
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
+from fastai.vision.all import *
 
 app = FastAPI()
 
+# Load a fastai model from file
+learn = load_learner("trained_model.pkl")
+print("Model loaded successfully!")
 
-# Allow CORS for all domains
+
+# Add CORS middleware to allow cross-origin requests
 @app.middleware("http")
 async def add_cors_header(request, call_next):
     response = await call_next(request)
@@ -16,18 +16,24 @@ async def add_cors_header(request, call_next):
     return response
 
 
+# Define the API routes
+
+
+# Define the root route
 @app.get("/", tags=["Root"])
 def read_root():
     return {"Hello": "World"}
 
 
+# Define the echo route
 @app.get("/echo/{id}")
 def read_item(id: str = None, q: str = None):
     return {"id": id, "q": q}
 
 
-# @app.post("/classify/")
-# def classify_image(image: UploadFile = File(...)):
-#     img = PILImage.create(image.file)
-#     pred, pred_idx, probs = learn.predict(img)
-#     return {"prediction": pred, "probability": probs[pred_idx].item()}
+# Define the classify route
+@app.post("/classify/")
+def classify_image(image: UploadFile = File(...)):
+    img = PILImage.create(image.file)
+    pred, pred_idx, probs = learn.predict(img)
+    return {"prediction": pred, "probability": probs[pred_idx].item()}
