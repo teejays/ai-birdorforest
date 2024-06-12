@@ -5,11 +5,11 @@ meta {
 }
 
 post {
-  url: http://localhost:8000/classify
+  url: http://{{host}}:{{port}}/classify
   body: multipartForm
   auth: none
 }
 
 body:multipart-form {
-  image: @file(/Users/teejays/Development/ai/lab-birdorforest/ml/test_bird.jpg)
+  image: @file(/Users/teejays/Development/ai/lab-birdorforest/test-images/test_forest1.jpg)
 }
