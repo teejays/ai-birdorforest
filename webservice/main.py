@@ -4,11 +4,17 @@ from fastapi import FastAPI, File, UploadFile
 
 app = FastAPI()
 
+import os
 from fastai.vision.all import PILImage, load_learner
 
 # Load a fastai model from file
-learn = load_learner("trained-model-fastai.pkl")
-print("Model loaded successfully!")
+# read file name from env variable WEBSERVER_MODEL_FILE_PATH
+model_file_path = os.getenv("WEBSERVER_MODEL_FILE_PATH")
+if model_file_path is None:
+    model_file_path = "trained-model-fastai.pkl"
+print(f"Loading model from file: {model_file_path}")
+learn = load_learner(model_file_path)
+print("Model loaded successfully")
 
 
 # Add CORS middleware to allow cross-origin requests
