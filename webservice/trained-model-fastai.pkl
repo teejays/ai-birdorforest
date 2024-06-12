@@ -1,0 +1,1 @@
+/Users/teejays/Development/ai/lab-birdorforest/ml/trained-model-fastai-2024-06-12-143109.pkl
