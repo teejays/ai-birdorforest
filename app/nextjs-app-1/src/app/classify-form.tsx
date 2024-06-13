@@ -1,7 +1,8 @@
 'use client'
 
 import { FileUploadForm } from '@/components/form/file-upload-form'
-import { Group, Text } from '@mantine/core'
+import { Alert, Group, Text } from '@mantine/core'
+
 import { useState } from 'react'
 
 export const ClassifyForm = (props: {}) => {
@@ -11,6 +12,13 @@ export const ClassifyForm = (props: {}) => {
     }
 
     const [response, setResponse] = useState<Response | null>(null)
+    const [err, setErr] = useState<any | null>(null)
+
+    // Reset the response and error when a new file is selected
+    const onFileChange = (file: File | null) => {
+        setResponse(null)
+        setErr(null)
+    }
 
     // Read the env variable SERVER_HOST in this react component
     const serverHost =
@@ -30,12 +38,16 @@ export const ClassifyForm = (props: {}) => {
             setResponse(result)
         } catch (error) {
             console.error('Error:', error)
+            setErr(error)
         }
     }
 
     return (
         <div>
-            <FileUploadForm onSubmit={onFileSubmit} />
+            <FileUploadForm
+                onFileChange={onFileChange}
+                onSubmit={onFileSubmit}
+            />
             {response && (
                 <div>
                     <Text size="xl" fw={500} td="underline">
@@ -50,6 +62,16 @@ export const ClassifyForm = (props: {}) => {
                         <Text>{response.probability}</Text>
                     </Group>
                 </div>
+            )}
+            {err && (
+                <Alert
+                    title="Error"
+                    color="red"
+                    withCloseButton
+                    onClose={() => setErr(null)}
+                >
+                    {err.toString()}
+                </Alert>
             )}
         </div>
     )

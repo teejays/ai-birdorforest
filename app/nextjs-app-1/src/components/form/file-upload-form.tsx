@@ -8,10 +8,17 @@ import { useState } from 'react'
 export const FileUploadForm = (props: {
     // The function to call when the form is submitted.
     onSubmit: (file: File) => Promise<void>
+    onFileChange?: (file: File | null) => void
 }) => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null)
     const [submitting, setSubmitting] = useState(false)
 
+    const onFileChange = (file: File | null) => {
+        setSelectedFile(file)
+        if (props.onFileChange) {
+            props.onFileChange(file)
+        }
+    }
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         if (selectedFile) {
@@ -56,7 +63,7 @@ export const FileUploadForm = (props: {
         <div>
             <form onSubmit={handleSubmit}>
                 <FileButton
-                    onChange={setSelectedFile}
+                    onChange={onFileChange}
                     accept="image/png,image/jpeg"
                 >
                     {(props) => (
