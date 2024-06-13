@@ -2,6 +2,7 @@
 
 from fastapi import FastAPI, File, UploadFile
 
+
 app = FastAPI()
 
 import os
@@ -22,7 +23,14 @@ print("Model loaded successfully")
 async def add_cors_header(request, call_next):
     response = await call_next(request)
     response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Headers"] = "*"
     return response
+
+
+# Add a preflight handler to allow OPTIONS requests
+@app.options("/{rest_of_path:path}")
+async def preflight_handler(*, rest_of_path: str):
+    return "Preflight request handled."
 
 
 # Define the API routes
