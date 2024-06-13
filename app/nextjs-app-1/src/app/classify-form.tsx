@@ -7,7 +7,8 @@ export const ClassifyForm = (props: {}) => {
     const [response, setResponse] = useState<JSON | null>(null)
 
     // Read the env variable SERVER_HOST in this react component
-    const serverHost = process.env.NEXT_PUBLIC_SERVER_HOST || '127.0.0.1:8000'
+    const serverHost =
+        process.env.NEXT_PUBLIC_SERVER_HOST || 'http://127.0.0.1:8000'
 
     console.log('NEXT_PUBLIC_SERVER_HOST', process.env.NEXT_PUBLIC_SERVER_HOST)
     console.log('Server host', serverHost)
@@ -16,7 +17,7 @@ export const ClassifyForm = (props: {}) => {
         // Send the selected image file to server in a post request
         const formData = new FormData()
         formData.append('image', file)
-        fetch(`http://${serverHost}/classify`, {
+        fetch(`${serverHost}/classify`, {
             method: 'POST',
             body: formData,
         })
