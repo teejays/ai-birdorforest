@@ -1,4 +1,5 @@
 ml/blah.txt filter=lfs diff=lfs merge=lfs -text
 ml/blah.jpg filter=lfs diff=lfs merge=lfs -text
-ml/images/*.jpg filter=lfs diff=lfs merge=lfs -text
 ml/images/blah.txt filter=lfs diff=lfs merge=lfs -text
+ml/images/*.jpg filter=lfs diff=lfs merge=lfs -text
+ml/images/bird/*.jpg filter=lfs diff=lfs merge=lfs -text
