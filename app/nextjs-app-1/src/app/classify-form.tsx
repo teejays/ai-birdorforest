@@ -1,6 +1,6 @@
 'use client'
 
-import { FileUploadForm } from '@/components/form/file-upload-form'
+import { FileUploadForm } from '@/components/file-upload-form'
 import { Alert, Group, Text } from '@mantine/core'
 
 import { useState } from 'react'
