@@ -5,9 +5,21 @@ meta {
 }
 
 post {
-  url: http://{{host}}:{{port}}/classify
+  url: http://{{host}}/classify
   body: multipartForm
   auth: none
+}
+
+headers {
+  Accept: */*
+  Accept-Encoding: gzip, deflate
+  Accept-Language: en-US,en;q=0.9,ms;q=0.8
+  Connection: keep-alive
+  Dnt: 1
+  Host: ai-birdorforest.onrender.com
+  Origin: http://localhost:3000
+  Referer: http://localhost:3000/
+  User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36
 }
 
 body:multipart-form {
