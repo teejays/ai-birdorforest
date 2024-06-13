@@ -40,3 +40,9 @@ Make a POST call to http://localhost:8000/classify with a multipart-form body, w
 After trying for a day, I have come to the conclusion that fastai based Python apps cannot be deployed on Vercel. There are some ~4yr old community posts that support that. The main reason being that the size of the fastai library (which includes PyTorch, and is used to load and use the model) is bigger than what Vercel can handle.
 
 There is a potential work around, where we save the ml model as a standard PyTorch compatible file and then use torch to load and use it. However, the code around using torch directly is not very simply for newbie like me. Hence, we're not taking that approach for now.
+
+### Render.com
+
+It is being deployed on render.com, and available at https://ai-birdorforest.onrender.com.
+
+The free render.com shuts down after a period of inactivity so I've setup a cronjob at cron-job.org to hit the server every few minutes.
