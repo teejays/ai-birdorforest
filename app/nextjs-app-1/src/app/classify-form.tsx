@@ -1,7 +1,7 @@
 'use client'
 
 import { FileUploadForm } from '@/components/form/file-upload-form'
-import { Container, Group, Text } from '@mantine/core'
+import { Group, Text } from '@mantine/core'
 import { useState } from 'react'
 
 export const ClassifyForm = (props: {}) => {
@@ -18,9 +18,9 @@ export const ClassifyForm = (props: {}) => {
 
     const onFileSubmit = async (file: File) => {
         // Send the selected image file to server in a post request
-        const formData = new FormData()
-        formData.append('image', file)
         try {
+            const formData = new FormData()
+            formData.append('image', file)
             const response = await fetch(`${serverHost}/classify`, {
                 method: 'POST',
                 body: formData,
