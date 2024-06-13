@@ -38,19 +38,19 @@ async def preflight_handler(*, rest_of_path: str):
 
 # Define the root route
 @app.get("/", tags=["Root"])
-def read_root():
+async def read_root():
     return {"Hello": "World"}
 
 
 # Define the echo route
 @app.get("/echo/{id}")
-def read_item(id: str = None, q: str = None):
+async def read_item(id: str = None, q: str = None):
     return {"id": id, "q": q}
 
 
 # Define the classify route
 @app.post("/classify")
-def classify_image(image: UploadFile = File(...)):
+async def classify_image(image: UploadFile = File(...)):
     img = PILImage.create(image.file)
     pred, pred_idx, probs = learn.predict(img)
     return {"prediction": pred, "probability": probs[pred_idx].item()}
