@@ -7,7 +7,7 @@ const Home = (props: {}) => {
             <Title order={1}>Image Classification</Title>
             <Text>
                 This is a simple image classification app. Upload an image and
-                the server will classify it.
+                the server will classify it to either a bird 🦜 or a forest 🌳.
             </Text>
             <ClassifyForm />
         </Container>

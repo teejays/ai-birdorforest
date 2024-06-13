@@ -50,17 +50,18 @@ export const ClassifyForm = (props: {}) => {
             />
             {response && (
                 <div>
-                    <Text size="xl" fw={500} td="underline">
-                        Results
+                    <Text>
+                        ✅ I think this is a {response.prediction}{' '}
+                        {response.prediction === 'bird'
+                            ? '🦜'
+                            : response.prediction === 'forest'
+                            ? '🌳'
+                            : '❓'}
+                        . I am{' '}
+                        {Math.floor(parseFloat(response.probability) * 1000) /
+                            10}
+                        % confident.
                     </Text>
-                    <Group>
-                        <Text fw={500}>Prediction:</Text>{' '}
-                        <Text>{response.prediction}</Text>
-                    </Group>
-                    <Group>
-                        <Text fw={500}>Probability:</Text>{' '}
-                        <Text>{response.probability}</Text>
-                    </Group>
                 </div>
             )}
             {err && (
