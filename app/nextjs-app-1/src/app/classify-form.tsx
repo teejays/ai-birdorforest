@@ -1,6 +1,7 @@
 'use client'
 
 import { FileUploadForm } from '@/components/file-upload-form'
+import { StatusChecker } from '@/components/status-checker'
 import { Alert, Group, Text } from '@mantine/core'
 
 import { useState } from 'react'
@@ -74,6 +75,7 @@ export const ClassifyForm = (props: {}) => {
                     {err.toString()}
                 </Alert>
             )}
+            <StatusChecker url={`${serverHost}/echo/ok`} />
         </div>
     )
 }
