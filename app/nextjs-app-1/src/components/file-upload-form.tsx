@@ -1,6 +1,7 @@
 'use client'
 
-import { Button, FileButton, Group, Text } from '@mantine/core'
+import { Alert, Button, FileButton, Group, Text } from '@mantine/core'
+import { IconInfoCircle } from '@tabler/icons-react'
 import pica from 'pica'
 import { useState } from 'react'
 
@@ -12,8 +13,17 @@ export const FileUploadForm = (props: {
 }) => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null)
     const [submitting, setSubmitting] = useState(false)
+    const [alertFileSize, setAlertFileSize] = useState(false)
 
     const onFileChange = (file: File | null) => {
+        console.log('File selected:', file)
+        // Check if the file is larger than 2MB.
+        if (file?.size && file?.size > 2 * 1024 * 1024) {
+            setAlertFileSize(true)
+            setSelectedFile(null)
+            return
+        }
+        setAlertFileSize(false)
         setSelectedFile(file)
         if (props.onFileChange) {
             props.onFileChange(file)
@@ -61,6 +71,20 @@ export const FileUploadForm = (props: {
 
     return (
         <div>
+            {alertFileSize && (
+                <Alert
+                    variant="light"
+                    color="grape"
+                    radius="xl"
+                    withCloseButton
+                    title="Large File"
+                    icon={<IconInfoCircle />}
+                    onClose={() => setAlertFileSize(false)}
+                >
+                    File size is too large. Please upload a file smaller than
+                    2MB.
+                </Alert>
+            )}
             <form onSubmit={handleSubmit}>
                 <FileButton
                     onChange={onFileChange}
