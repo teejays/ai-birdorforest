@@ -19,6 +19,7 @@ export const StatusChecker = (props: { url: string }) => {
         } catch (error) {
             console.error('Error:', error)
             setStatus('Down')
+            setLastChecked(Date.now())
         }
     }
 
